@@ -1,6 +1,9 @@
 #!/bin/bash
+cflags=$2
+cflags="${cflags%\"}"
+cflags="${cflags#\"}"
 
-./configure CC=$1 CFLAGS=$2
+./configure CC=$1 CFLAGS=$cflags
 make
 cp modules/swoole.so ../$4/swoole.$3
 make clean
