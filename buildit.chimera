@@ -3,9 +3,10 @@ cflags=$2
 cflags="${cflags%\"}"
 cflags="${cflags#\"}"
 cd src_corpora/swoole-src
-test -f configure || $(phpize && ./configure)
+test -f configure || $(phpize)
 
-make CC=$1 CFLAGS="$cflags"
+./configure CC="$1 $cflags"
+make CFLAGS="-Wall -pthread -std=gnu89"
 #cp modules/swoole.so ../$4/swoole.$3
 install -D modules/swoole.so -m 644 -t ../../$4/
 mv ../../$4/swoole.so ../../$4/swoole.$3
